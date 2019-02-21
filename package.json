@@ -8,6 +8,7 @@
     "npm",
     "jest"
   ],
+  "author": "Melany Valencia Montoya <melany.svalencia@gmail.com>",
   "license": "MIT",
   "scripts": {
     "eslint": "eslint --ext .js src/ test/",

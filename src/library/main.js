@@ -1,10 +1,15 @@
 const fs = require('fs');
 const path = require('path');
-
-export const walkSync = function(dir) {
+/* Función para que los archivos encontrados sean solo .md */
+export const filterMd = filterMdi => 
+  filterMdi.filter((file) => {
+    return path.extname(file) === '.md';
+  });
+;
+export const walkSync = dir => {
   const files = fs.readdirSync(dir);
   let filelist = [];
-  files.forEach(function(file) {
+  files.forEach(file => {
     if (fs.statSync(dir + '/' + file).isDirectory()) {
       filelist = filelist.concat(walkSync(dir + '/' + file, filelist));
     } else {
@@ -14,7 +19,7 @@ export const walkSync = function(dir) {
   // console.log(dir, filelist);
   return filelist;
 };
-// walkSync('C:/Users/Laboratoria/Documents/LIM008-fe-md-links/src/library', []);
+walkSync('C:/Users/Laboratoria/Documents/LIM008-fe-md-links/src/library', []);
 
 /** Verifica si la ruta es relativa o absoluta 
 * @param {ruta a verificar}  root
@@ -28,11 +33,7 @@ export const verifyRoot = (root) => {
   return rootType;
 };
 
-/**
- Convierte de relativa a absoluta
-  * @param {ruta relativa} root
-  * @returns rootAbsolute 
-  */
+/** Convierte de relativa a absoluta  */
 export const rootRelative = (root) => {
   if (path.isAbsolute(root)) { 
     return root;

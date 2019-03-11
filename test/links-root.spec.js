@@ -1,16 +1,31 @@
 
 // Iniciando tests
 
-import {verifyRoot, rootRelative, walkSync, filterMd} from '../src/library/main.js';
-import {mdLinks} from '../src/md-links/links-root.js';
+import {verifyRoot, rootRelative, walkSync, filterMd} from '../src/library/path.js';
+// import {mdLinks} from '../src/md-links/links-root.js';
+// import {validateLinks } from '../src/library/options.js';
 
-const input = [ 'C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\prueba/directory/fiu.md',
-  'C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\prueba/directory/guia/guau.md',
-  'C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\prueba/directory/guia/miau.md', 
+const input = [ 'C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba/directory/fiu.md',
+  'C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba/directory/guia/guau.md',
+  'C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba/directory/guia/miau.md', 
 ];
-
 const input2 = ['C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\src\\library\\read.md',
   'C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\src\\library\\txt.md'];
+
+  // describe('Deberia validar los links', () => {
+  //     it('debería retornar los links validados ', (done) => {
+  //     return validateLinks('')
+  //       .then(() => obtenerDatosFirebase(
+  //         (data) => {
+  //           const result = data.find((post) => post.id === 'p5CSUf9BvNfsdSuylmN6');
+  //           expect(result).toBe(undefined);
+  //           done();
+  //         }
+  //       ));
+  //   });
+  
+ 
+
 
 describe('Debería evaluar una ruta', () => {
   it('debería ser una función', () => {
@@ -41,7 +56,7 @@ describe('Función debe retornar un array con los links', () => {
     return expect(typeof walkSync).toBe('function');
   });
   it('debería retornar el array con las rutas dentro', () => {
-    expect(walkSync('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\prueba')).toEqual(input);
+    expect(walkSync('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba')).toEqual(input);
   });
 });
 

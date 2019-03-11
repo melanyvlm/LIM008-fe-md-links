@@ -10,11 +10,13 @@
   ],
   "author": "Melany Valencia Montoya <melany.svalencia@gmail.com>",
   "license": "MIT",
+  "bin": {
+    "md-links": "dist/cli.js"
+  },
   "scripts": {
     "eslint": "eslint --ext .js src/ test/",
     "test": "jest --coverage",
     "build": "babel src -d dist"
-
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -30,6 +32,7 @@
     "regenerator-runtime": "^0.13.1"
   },
   "dependencies": {
-    "marked": "^0.6.1"
+    "marked": "^0.6.1",
+    "node-fetch": "^2.3.0"
   }
 }

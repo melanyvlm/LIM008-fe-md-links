@@ -17,6 +17,10 @@ herramienta usando [Node.js](https://nodejs.org/), que lea y analice archivos
 en formato `Markdown`, para verificar los links que contengan y reportar
 algunas estadísticas.
 
+
+## Diagrama de flujo para el proyecto realizado
+![Diagrama de flujo](https://user-images.githubusercontent.com/45083232/54318408-44127180-45b4-11e9-8e7a-a8f78d4cde17.png)
+
 ## Objetivo
 
 El objetivo práctico de esta librería es por defecto validar si las URLs ingresadas por el usuario responden :

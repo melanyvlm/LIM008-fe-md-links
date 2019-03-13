@@ -5,29 +5,33 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getLinksMdContent = void 0;
 
+var _path = require("./path.js");
+
 var fs = require('fs');
 
 var myMarked = require('marked');
 
-var getLinksMdContent = function getLinksMdContent(ruta) {
-  var data = fs.readFileSync(ruta, 'utf8');
+var getLinksMdContent = function getLinksMdContent(arrayMd) {
   var linksArray = [];
-  var renderer = new myMarked.Renderer();
+  arrayMd.forEach(function (fileMd) {
+    var data = fs.readFileSync(fileMd, 'utf8');
+    var renderer = new myMarked.Renderer();
 
-  renderer.link = function (href, title, text) {
-    linksArray.push({
-      href: href,
-      text: text.substr(0, 50),
-      file: ruta
+    renderer.link = function (href, title, text) {
+      linksArray.push({
+        href: href,
+        text: text.substr(0, 50),
+        file: fileMd
+      });
+      return '';
+    };
+
+    myMarked(data, {
+      renderer: renderer
     });
-    return '';
-  };
-
-  myMarked(data, {
-    renderer: renderer
   });
   return linksArray;
-}; // console.log(getLinksMdContent('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba\\directory\\fiu.md'));
+}; // console.log(getLinksMdContent(isFileOrDirectory('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba\\directory\\fiu.md')))
 
 
 exports.getLinksMdContent = getLinksMdContent;

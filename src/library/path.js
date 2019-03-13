@@ -1,27 +1,27 @@
 const fs = require('fs');
 const path = require('path');
 
-
-/* Función para que los archivos encontrados sean solo .md */
-export const filterMd = filterMdi => 
-  filterMdi.filter((file) => {
-    return path.extname(file) === '.md';
-  });
-;
-export const walkSync = dir => {
-  const files = fs.readdirSync(dir);
+/* Función que recorre si es archivo o directorio && retorna archivos .md */
+export const isFileOrDirectory = (dir) => {
   let filelist = [];
-  files.forEach(file => {
-    if (fs.statSync(dir + '/' + file).isDirectory()) {
-      filelist = filelist.concat(walkSync(dir + '/' + file, filelist));
-    } else {
-      filelist.push(dir + '/' + file);
+  if ( fs.statSync(dir).isFile() ) {
+filelist.push(dir) 
+  } else {
+    const files = fs.readdirSync(dir);
+
+      files.forEach((file) => {
+  const toJoin = path.join(dir , file);
+      if (fs.statSync(toJoin).isDirectory()) {
+        filelist = filelist.concat(isFileOrDirectory(toJoin, filelist));
+      } else if (fs.statSync(toJoin).isFile() && path.extname(toJoin) === '.md') {
+        filelist.push(toJoin);
+      }
+    });
     }
-  });
-  console.log(dir, filelist);
-  return filelist;
+/*   console.log(filelist);
+ */  return filelist;
 };
-// walkSync('C:/Users/Laboratoria/Documents/LIM008-fe-md-links/src/library', []);
+isFileOrDirectory('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\src\\library');
 
 /** Verifica si la ruta es relativa o absoluta 
 * @param {ruta a verificar}  root
@@ -39,26 +39,7 @@ export const verifyRoot = (root) => {
 export const rootRelative = (root) => {
   if (path.isAbsolute(root)) { 
     return root;
-    // toString();
   } else {
     return root = path.resolve(root);
   }
 };
-
-// export const walkSync = dir => {
-//   const files = fs.readdirSync(dir);
-//   let filelist = [];
-//   files.forEach(file => {
-//     if (fs.statSync(dir + '/' + file).isDirectory()) {
-//       if (path.extname(file) === '.md') {
-//         if (
-//           filelist = filelist.concat(walkSync(dir + '/' + file, filelist)));
-//       }
-//     } else {
-//       filelist.push(dir + '/' + file);
-//     }
-//   });
-//   // console.log(dir, filelist);
-//   return filelist;
-// };
-// walkSync('C://Users//Laboratoria//Documents//LIM008-fe-md-links//src//library', []);

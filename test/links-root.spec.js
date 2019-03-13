@@ -1,7 +1,7 @@
 
 // Iniciando tests
 
-import {verifyRoot, rootRelative, walkSync, filterMd} from '../src/library/path.js';
+import {verifyRoot, rootRelative,isFileOrDirectory, filterMd} from '../src/library/path.js';
 // import {mdLinks} from '../src/md-links/links-root.js';
 // import {validateLinks } from '../src/library/options.js';
 
@@ -23,10 +23,6 @@ const input2 = ['C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\src\\lib
   //         }
   //       ));
   //   });
-  
- 
-
-
 describe('Debería evaluar una ruta', () => {
   it('debería ser una función', () => {
     return expect(typeof verifyRoot).toBe('function');
@@ -53,10 +49,10 @@ describe('Debería convertir una ruta relativa a absoluta', () => {
 
 describe('Función debe retornar un array con los links', () => {
   it('debería ser una función', () => {
-    return expect(typeof walkSync).toBe('function');
+    return expect(typeof isFileOrDirectory).toBe('function');
   });
   it('debería retornar el array con las rutas dentro', () => {
-    expect(walkSync('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba')).toEqual(input);
+    expect(isFileOrDirectory('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba')).toEqual(input);
   });
 });
 

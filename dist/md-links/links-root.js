@@ -1,48 +1,84 @@
-// import {verifyRoot, rootRelative, walkSync , filterMd} from '../src/library/path.js';
-// const marked = require('marked');
-// const renderer = new myMarked.Renderer();
-// // Función para ejecutar Links
-// export const mdLinks = (path, options) => {
-//   new Promise((resolve, reject) => { 
-//     if (verifyRoot(root) ) {
-// walkSync(filterMd(root))  
-//  // const transRootRelative = rootRelative(path);
-//     // if (fs.existsSync(path)) {
-//     //   walkSync(pathAbsolute);
-//     // }
-// /* Path.isAbsolute determina si una ruta es absoluta */
-// /** Convierte de relativa a absoluta  */
-// // export const rootRelative = (root) => {
-// //   if (path.isAbsolute(root)) { 
-// //     return root;
-// //     // toString();
-// //   } else {
-// //     return root = path.resolve(root);
-// //   }
-// // };
-// const mdLinks = (path, options) => new Promise((resolve, reject) => {
-//   const pathAbsolute = convertRelativeAbsolute(path);
-//   if (fs.existsSync(pathAbsolute)) {
-//     checkIfFileOrFolder(pathAbsolute);
-//     setTimeout(() => {
-//       if (options.stats && !options.validate) {
-//         resolve(linkStats(links))
-//       } else if (options.stats && options.validate) {
-//         const linkresol = linkStats(links);
-//         validateLinks(links, arrLinksValidate => {
-//           linkresol.broken = arrLinksValidate.filter(link => (link.statusText === 'FAIL')).length;
-//           resolve(linkresol);
-//         });
-//       } else if (options.validate && !options.stats) {
-//         validateLinks(links, resolve);
-//       } else {
-//         resolve(links);
-//       }
-//     },
-//       2000);
-//   } else {
-//     reject(`La ruta no existe o es incorrecta`);
-//   }
-// })
-// module.exports = mdLinks;
 "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.mdLinks = void 0;
+
+var _path = require("../library/path.js");
+
+var _options = require("../library/options.js");
+
+var _links = require("../library/links.js");
+
+var options = {
+  validate: true // Función para ejecutar Links
+
+};
+
+var mdLinks = function mdLinks(path, options) {
+  // new Promise((resolve, reject) => {
+  var rootAbsolute = '';
+
+  if ((0, _path.verifyRoot)(path) !== true) {
+    rootAbsolute = rootAbsolute + (0, _path.rootRelative)(path);
+  } else {
+    rootAbsolute = path;
+  }
+
+  ; // return new Promise((resolve) => {
+  //   if (options.validate === false) {
+  //     resolve(getLinksMdContent(isFileOrDirectory(path)));
+  //   }
+  //   if (options.validate) {
+  //     resolve(validateLinks(isFileOrDirectory(path)))
+  //   }
+  // })
+
+  if (options.validate === false) {
+    return new Promise(function (resolve) {
+      resolve((0, _links.getLinksMdContent)((0, _path.isFileOrDirectory)(path)));
+    });
+  } else if (options.validate) {
+    return (0, _options.validateLinks)((0, _links.getLinksMdContent)((0, _path.isFileOrDirectory)(path))).then(function (resp) {
+      return resp;
+    }).catch(function (err) {
+      return err;
+    });
+  }
+};
+
+exports.mdLinks = mdLinks;
+mdLinks("C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba\\directory", options).then(function (res) {
+  return console.log(res);
+}).catch(function (err) {
+  return console.log(err);
+}); // console.log(links)
+// if (options.validate) {
+//   linksTotal
+//   getLinksMdContent
+// } else if (options.validate === false) {
+//   return new Promise(resolve => resolve(validateLinks(path)));
+// }
+// mdLinks([{href: 'https://////es.wikipedia.org/wiki/Markdown'
+// } ]).then(response => console.log(response))
+// export const mdLinks = (route, options) => {
+//   if (options.validate) {
+//     return validateLink(route).then(resp => resp).catch(err => err);  
+//   } else if (options.validate === false) {
+//     return new Promise(resolve => resolve(lookUpForLinks(route)));
+//   } 
+// };
+// });
+//   const optionsValid = options.validate 
+//   ? resolve (getLinksMdContent(validateLinks(path)))
+//   : resolve (getLinksMdContent(path))
+// return optionsValid;
+// if (options.validate) {
+//   resolve((getLinksMdContent(validateLinks(path)))
+//   } 
+// }
+//   if (options.validate) {
+// resolve((getLinksMdContent(validateLinks(path)))
+//   } 
+// }

@@ -19,7 +19,7 @@ algunas estadísticas.
 
 
 ## Diagrama de flujo para el proyecto realizado
-![Diagrama de flujo](https://user-images.githubusercontent.com/45083232/54318408-44127180-45b4-11e9-8e7a-a8f78d4cde17.png)
+![diagrama de flujo](https://user-images.githubusercontent.com/45083232/54355402-01d64800-4627-11e9-96b9-cd53b8ec6e6b.png)
 
 ## Objetivo
 

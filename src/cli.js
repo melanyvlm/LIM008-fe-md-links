@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-
-import { mdLinks } from './md-links/links-root.js';
+const mdLinks = require('./md-links/links-root.js');
+// import { mdLinks } from './md-links/links-root.js';
 import {uniqueLinks} from './library/options.js';
 import {brokenLinks} from './library/options.js';
 /* Este es la lína de comandos de la librería  */

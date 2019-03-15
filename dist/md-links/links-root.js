@@ -11,10 +11,11 @@ var _options = require("../library/options.js");
 
 var _links = require("../library/links.js");
 
-// const options = {
-//   validate: true
-// }
-// Función para ejecutar Links
+var options = {
+  validate: true // Función para ejecutar Links
+
+};
+
 var mdLinks = function mdLinks(path, options) {
   var rootAbsolute = '';
 
@@ -37,11 +38,15 @@ var mdLinks = function mdLinks(path, options) {
       return err;
     });
   }
-}; // mdLinks('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba\\directory', options).then(res => console.log(res)).catch(err => console.log(err))
-//   const optionsValid = options.validate 
-//   ? return resolve (getLinksMdContent(validateLinks(path)))
-//   : resolve (getLinksMdContent(path))
-// return optionsValid;
-
+};
 
 exports.mdLinks = mdLinks;
+module.export = mdLinks;
+mdLinks("C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba\\directory", options).then(function (res) {
+  return console.log(res);
+}).catch(function (err) {
+  return console.log(err);
+});
+var optionsValid = options.validate; //   ? return resolve (getLinksMdContent(validateLinks(path)))
+//   : resolve (getLinksMdContent(path))
+// return optionsValid;

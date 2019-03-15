@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getLinksMdContent = void 0;
 
-var _path = require("./path.js");
-
 var fs = require('fs');
 
 var myMarked = require('marked');
@@ -31,7 +29,6 @@ var getLinksMdContent = function getLinksMdContent(arrayMd) {
     });
   });
   return linksArray;
-}; // console.log(getLinksMdContent(isFileOrDirectory('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba\\directory\\fiu.md')))
-
+};
 
 exports.getLinksMdContent = getLinksMdContent;

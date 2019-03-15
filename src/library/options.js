@@ -1,13 +1,7 @@
-import { isFileOrDirectory } from './path';
-import { getLinksMdContent } from './links';
 
 const fetch = require('node-fetch');
-// import {  } from "module";
-/** Para poder ver en la consola */
-// import {getLinksMdContent} from './links';
 export const validateLinks = (arrOfLinks) => {
-  // console.log('asdf', arrOfLinks);
-    const arrLink = arrOfLinks.map(linksObj => new Promise((resolve) => {
+  const arrLink = arrOfLinks.map(linksObj => new Promise((resolve) => {
     /* Dentro de la promesa , debería haber reject. Sin embargo, no hay porque sino no aparecerían los msjs .catch. */
     const urlsFetch = fetch(linksObj.href);
     urlsFetch.then(response => {
@@ -22,13 +16,18 @@ export const validateLinks = (arrOfLinks) => {
       }
     }).catch((err) => {
       linksObj.status = 'Url Fail';
-      linksObj.message = 'Fail';
+      linksObj.message = 'Error';
       resolve(linksObj);
     });
   }));
   return Promise.all(arrLink);
 };
 
-// console.log(getLinksMdContent(isFileOrDirectory('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba\\directory\\fiu.md')))
-// validateLinks(getLinksMdContent((isFileOrDirectory('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba')))).then(res => console.log( res)).catch(err=> console.log(err))
-                                                                                                                
+export const brokenLinks = (arrObjLinksValidate) => { 
+  const arrBrokenLinks = [arrObjLinksValidate.filter(links => links.message === 'Fail')].length;
+  return arrBrokenLinks;
+};
+export const uniqueLinks = (arrObj) => {
+  const Linkunique = [...new Set(arrObj.map(link => link.href))].length;
+  return Linkunique;
+};

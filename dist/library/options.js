@@ -3,20 +3,19 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.validateLinks = void 0;
+exports.uniqueLinks = exports.brokenLinks = exports.validateLinks = void 0;
 
-var _path = require("./path");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-var _links = require("./links");
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
 
-var fetch = require('node-fetch'); // import {  } from "module";
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
-/** Para poder ver en la consola */
-// import {getLinksMdContent} from './links';
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
+var fetch = require('node-fetch');
 
 var validateLinks = function validateLinks(arrOfLinks) {
-  // console.log('asdf', arrOfLinks);
   var arrLink = arrOfLinks.map(function (linksObj) {
     return new Promise(function (resolve) {
       /* Dentro de la promesa , debería haber reject. Sin embargo, no hay porque sino no aparecerían los msjs .catch. */
@@ -33,14 +32,31 @@ var validateLinks = function validateLinks(arrOfLinks) {
         }
       }).catch(function (err) {
         linksObj.status = 'Url Fail';
-        linksObj.message = 'Fail';
+        linksObj.message = 'Error';
         resolve(linksObj);
       });
     });
   });
   return Promise.all(arrLink);
-}; // console.log(getLinksMdContent(isFileOrDirectory('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba\\directory\\fiu.md')))
-// validateLinks(getLinksMdContent((isFileOrDirectory('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba')))).then(res => console.log( res)).catch(err=> console.log(err))
-
+};
 
 exports.validateLinks = validateLinks;
+
+var brokenLinks = function brokenLinks(arrObjLinksValidate) {
+  var arrBrokenLinks = [arrObjLinksValidate.filter(function (links) {
+    return links.message === 'Fail';
+  })].length;
+  return arrBrokenLinks;
+};
+
+exports.brokenLinks = brokenLinks;
+
+var uniqueLinks = function uniqueLinks(arrObj) {
+  var Linkunique = _toConsumableArray(new Set(arrObj.map(function (link) {
+    return link.href;
+  }))).length;
+
+  return Linkunique;
+};
+
+exports.uniqueLinks = uniqueLinks;

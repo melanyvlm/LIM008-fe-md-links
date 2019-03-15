@@ -1,34 +1,43 @@
 #!/usr/bin/env node
 
+import { mdLinks } from './md-links/links-root.js';
+import {uniqueLinks} from './library/options.js';
+import {brokenLinks} from './library/options.js';
+/* Este es la lína de comandos de la librería  */
 // import { mdLinks } from "./md-links/links-root";
-// import {validateLinks } from './library/options.js';
-/* PS C:\\Users.....> md-links (0) ruta (1) 'validate'(2) || 'stats'(2) */
-// const [,, ...args] = process.argv.slice(2);
-// const options = {
-//   validate: false,
-  
-// };
+/* PS C:\\Users.....> md-links (0) ruta (1) 'validate'(3) || 'stats'(4) */
+// const [, , ...args] = process.argv;
+const options = {
+  validate: false
+};
+const args = process.argv.slice(2);
+const path = process.argv[2]; 
+const optionEnter = process.argv[3];
+const optionEnterExtra = process.argv[4];
 
-// if (args.length === 1) {
-//   console.log('retornar el objeto');
-// }
-// if (args.length === 2) {
-//   if (args[1] === 'validate' || args[1] === '-v') {
-//  options.validate = true;
-//  mdLinks(path,options).then((respo) => respo.forEach(linkmd => 
-//   console.log(`{$path}
-//   Total :`)))
-//     console.log('debería retornar el objeto con los links validados . "md-links"');
-//   } 
+if (optionEnter === '--stats' && optionEnterExtra === '--validate' || optionEnter === '--validate' && optionEnterExtra === '--stats') {
+  mdLinks(path, options).then(link => console.log(`
+  Total : ${link.length}
+  Unique: ${uniqueLinks(link)}
+  Broken: ${brokenLinks(link)}
+ `)).catch(err => (err));
+} else if (args.length === 1) {
+  options.validate = false;
+  mdLinks(path, options)
+    .then(link => link.forEach((links) => console.log(` 
+ ${links.href}  ${links.text}  `)))
+    .catch(err => console.log(err)); 
+} else if (optionEnter === '--validate' || optionEnter === '-v') {
+  options.validate = true;
+  mdLinks(path, options)
+    .then(link => link.forEach((linkMd) => console.log(` 
+ ${linkMd.href}  ${linkMd.text} ${linkMd.status} ${linkMd.message}`)))
+    .catch(err => console.log(err)); 
+} else if (optionEnter === '--stats' || optionEnter === '-s') {
+  mdLinks(path, options).then(link => console.log(`
+   Total: ${link.length}
+   Unique: ${uniqueLinks(link)}
+   `)).catch(err => console.log(err));
+} 
 
-//   if (args[1] === 'stats' || args[1] === '-s') {
-//     console.log('debería retornar los links total , únicos ');
-//   }
-// }
-// if (args.length === 3) {
-//   if (args[1] === 'validate' || args[1] === '-v' && args[2] === 'stats' || args[2] === '-s') {
-//     console.log('debería salir los links validados y stats ');
-//   } 
-//   if (args[1] === '-stats' || args[1] === '-s' && args[2] === 'validate' || args[2] === '-v') {
-//     console.log('debería retornar stats y luego validados ');
-//   }
+

@@ -1,7 +1,5 @@
 const fs = require('fs');
 const myMarked = require('marked');
-import { isFileOrDirectory } from "./path.js";
-
 export const getLinksMdContent = (arrayMd) => {
   let linksArray = [];
   arrayMd.forEach((fileMd) => {
@@ -13,10 +11,8 @@ export const getLinksMdContent = (arrayMd) => {
         text: text.substr(0, 50),
         file: fileMd });
       return '';
-    }
+    };
     myMarked(data, { renderer });
-  })
-   return linksArray;
+  });
+  return linksArray;
 };
-// console.log(getLinksMdContent(isFileOrDirectory('C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\test\\prueba\\directory\\fiu.md')))
-

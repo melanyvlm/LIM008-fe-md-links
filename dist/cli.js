@@ -1,32 +1,51 @@
 #!/usr/bin/env node
-// import { mdLinks } from "./md-links/links-root";
-// import {validateLinks } from './library/options.js';
-
-/* PS C:\\Users.....> md-links (0) ruta (1) 'validate'(2) || 'stats'(2) */
-// const [,, ...args] = process.argv.slice(2);
-// const options = {
-//   validate: false,
-// };
-// if (args.length === 1) {
-//   console.log('retornar el objeto');
-// }
-// if (args.length === 2) {
-//   if (args[1] === 'validate' || args[1] === '-v') {
-//  options.validate = true;
-//  mdLinks(path,options).then((respo) => respo.forEach(linkmd => 
-//   console.log(`{$path}
-//   Total :`)))
-//     console.log('debería retornar el objeto con los links validados . "md-links"');
-//   } 
-//   if (args[1] === 'stats' || args[1] === '-s') {
-//     console.log('debería retornar los links total , únicos ');
-//   }
-// }
-// if (args.length === 3) {
-//   if (args[1] === 'validate' || args[1] === '-v' && args[2] === 'stats' || args[2] === '-s') {
-//     console.log('debería salir los links validados y stats ');
-//   } 
-//   if (args[1] === '-stats' || args[1] === '-s' && args[2] === 'validate' || args[2] === '-v') {
-//     console.log('debería retornar stats y luego validados ');
-//   }
 "use strict";
+
+var _linksRoot = require("./md-links/links-root.js");
+
+var _options = require("./library/options.js");
+
+/* Este es la lína de comandos de la librería  */
+// import { mdLinks } from "./md-links/links-root";
+
+/* PS C:\\Users.....> md-links (0) ruta (1) 'validate'(3) || 'stats'(4) */
+// const [, , ...args] = process.argv;
+var options = {
+  validate: false
+};
+var args = process.argv.slice(2);
+var path = process.argv[2];
+var optionEnter = process.argv[3];
+var optionEnterExtra = process.argv[4];
+
+if (optionEnter === '--stats' && optionEnterExtra === '--validate' || optionEnter === '--validate' && optionEnterExtra === '--stats') {
+  (0, _linksRoot.mdLinks)(path, options).then(function (link) {
+    return console.log("\n  Total : ".concat(link.length, "\n  Unique: ").concat((0, _options.uniqueLinks)(link), "\n  Broken: ").concat((0, _options.brokenLinks)(link), "\n "));
+  }).catch(function (err) {
+    return err;
+  });
+} else if (args.length === 1) {
+  options.validate = false;
+  (0, _linksRoot.mdLinks)(path, options).then(function (link) {
+    return link.forEach(function (links) {
+      return console.log(" \n ".concat(links.href, "  ").concat(links.text, "  "));
+    });
+  }).catch(function (err) {
+    return console.log(err);
+  });
+} else if (optionEnter === '--validate' || optionEnter === '-v') {
+  options.validate = true;
+  (0, _linksRoot.mdLinks)(path, options).then(function (link) {
+    return link.forEach(function (linkMd) {
+      return console.log(" \n ".concat(linkMd.href, "  ").concat(linkMd.text, " ").concat(linkMd.status, " ").concat(linkMd.message));
+    });
+  }).catch(function (err) {
+    return console.log(err);
+  });
+} else if (optionEnter === '--stats' || optionEnter === '-s') {
+  (0, _linksRoot.mdLinks)(path, options).then(function (link) {
+    return console.log("\n   Total: ".concat(link.length, "\n   Unique: ").concat((0, _options.uniqueLinks)(link), "\n   "));
+  }).catch(function (err) {
+    return console.log(err);
+  });
+}

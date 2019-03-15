@@ -28,22 +28,13 @@ var isFileOrDirectory = function isFileOrDirectory(dir) {
       }
     });
   }
-  /*   console.log(filelist);
-   */
-
 
   return filelist;
 };
+/* Path.isAbsolute determina si una ruta es absoluta */
+
 
 exports.isFileOrDirectory = isFileOrDirectory;
-isFileOrDirectory("C:\\Users\\Laboratoria\\Documents\\LIM008-fe-md-links\\src\\library");
-/** Verifica si la ruta es relativa o absoluta 
-* @param {ruta a verificar}  root
-* @returns boolean : true si es absoluta 
-*                   false si es relativa
-*/
-
-/* Path.isAbsolute determina si una ruta es absoluta */
 
 var verifyRoot = function verifyRoot(root) {
   var rootType = path.isAbsolute(root);

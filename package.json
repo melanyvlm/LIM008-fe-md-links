@@ -2,7 +2,7 @@
   "name": "md-links",
   "version": "1.0.0",
   "description": "Markdown links @ Laboratoria",
-  "main": "src/index.html",
+  "main": "dist/md-links/links-root.js",
   "keywords": [
     "javascript",
     "npm",

@@ -23,12 +23,12 @@ algunas estadísticas.
 ## Objetivo
 
 El objetivo práctico de esta librería es por defecto validar si las URLs ingresadas por el usuario responden :
-° Si es OK es una URL válida
-° Si es Fail no es una URL válida.
+- Si es OK es una URL válida
+- Si es Fail no es una URL válida.
 También nos reporta algunas estadísticas :
-° Total de links encontrados
-° Total de links únicos
-° Finalmente, total de links rotos.
+- Total de links encontrados
+- Total de links únicos
+- Finalmente, total de links rotos.
 
 ### Instrucción de instalación 
 ## Github 
@@ -99,3 +99,10 @@ Unique: 3
 Broken: 1
 ```
 
+#### Backlog para la implemetnación de la librería
+
+![Screenshot_2](https://user-images.githubusercontent.com/45083232/54448933-ef3d3b00-471a-11e9-8b18-d2365fa4e956.png)
+
+También se utilizó Millestones e Issues con sus respectivos labels
+
+![Screenshot_3](https://user-images.githubusercontent.com/45083232/54449359-e1d48080-471b-11e9-8641-77a905f92615.png)

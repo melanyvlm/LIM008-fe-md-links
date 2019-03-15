@@ -50,16 +50,16 @@ const validOutput = [{ href: 'https://es.wikipedia.org/wiki/Markdown',
 
 } ];
 
-const mdy = [{ href: 'https://es.wikipedia.org/wiki/Markdown',
-text: 'Markdown',
-},
-{ href: 'https://github.com/melanyvlm/LIM008-fe-md-links/src',
-text: 'hfhfh',
+// const mdy = [{ href: 'https://es.wikipedia.org/wiki/Markdown',
+//   text: 'Markdown',
+// },
+// { href: 'https://github.com/melanyvlm/LIM008-fe-md-links/src',
+//   text: 'hfhfh',
 
-},
-{ href: 'https://www.facebook.com',
-text: 'Hi',
-} ];
+// },
+// { href: 'https://www.facebook.com',
+//   text: 'Hi',
+// } ];
 
 describe('Debería añadir href,text,file a cada archivo Md', () => {
   it('Debería retornar array con objetos pusheados a  cada archivo md', () => {

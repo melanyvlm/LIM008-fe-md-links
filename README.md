@@ -99,7 +99,7 @@ Unique: 3
 Broken: 1
 ```
 
-#### Backlog para la implemetnación de la librería
+#### Backlog para la implementación de la librería
 
 ![Screenshot_2](https://user-images.githubusercontent.com/45083232/54448933-ef3d3b00-471a-11e9-8b18-d2365fa4e956.png)
 
